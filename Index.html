@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xyroz Eldhrien Dela Cruz — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#F5F7FA;
+    --line:#E4E8EE;
+    --text:#1C2530;
+    --muted:#66707C;
+    --accent:#3457D5;
+    --accent-soft:#EAEFFC;
+    --radius:10px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  ::selection{ background:var(--accent); color:#fff; }
+
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:760px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  .nav-inner .name{ font-weight:700; font-size:14.5px; letter-spacing:-0.01em; }
+  nav ul{ list-style:none; display:flex; gap:22px; font-size:13.5px; color:var(--muted); }
+  nav a:hover{ color:var(--accent); }
+  nav a:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:3px; }
+
+  .avatar{
+    width:96px; height:96px; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:28px;
+    overflow:hidden; border:1px solid var(--line); margin-bottom:22px;
+    flex-shrink:0;
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .hero{ padding:72px 0 56px; }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--accent);
+    letter-spacing:0.04em; margin-bottom:14px;
+  }
+  .hero h1{ font-size:clamp(30px, 5vw, 42px); font-weight:800; letter-spacing:-0.02em; line-height:1.15; }
+  .hero h1 span{ color:var(--accent); }
+  .hero .role{ margin-top:10px; font-size:16px; color:var(--muted); }
+  .hero .meta-row{
+    margin-top:26px; display:flex; gap:22px; flex-wrap:wrap;
+    font-size:13.5px; color:var(--muted);
+  }
+  .hero .meta-row .item{ display:flex; align-items:center; gap:7px; }
+  .hero .meta-row .item .ico{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .hero .actions{ margin-top:30px; display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    font-size:13.5px; font-weight:600; padding:11px 18px; border-radius:8px;
+    display:inline-flex; align-items:center; gap:6px; transition:opacity .15s, background .15s;
+  }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-primary:hover{ opacity:0.9; }
+  .btn-outline{ border:1px solid var(--line); color:var(--text); }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+
+  section{ padding:48px 0; border-top:1px solid var(--line); }
+  .section-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--accent);
+    letter-spacing:0.06em; margin-bottom:8px;
+  }
+  .section-title{ font-size:21px; font-weight:700; letter-spacing:-0.01em; margin-bottom:24px; }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px;
+  }
+  .edu-card{ display:flex; gap:16px; align-items:flex-start; }
+  .edu-badge{
+    width:42px; height:42px; border-radius:8px; background:var(--accent-soft);
+    color:var(--accent); display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:13px; flex-shrink:0;
+  }
+  .edu-card h3{ font-size:15.5px; font-weight:700; }
+  .edu-card p{ font-size:13.5px; color:var(--muted); margin-top:3px; }
+  .edu-card .note{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--accent); margin-top:10px; }
+
+  .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:14px; }
+  .skill-box h4{ font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-size:12.5px; padding:6px 12px; border-radius:20px;
+    border:1px dashed var(--line); color:var(--muted);
+  }
+
+  .proj-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
+  .proj-card{
+    border:1px dashed var(--line); border-radius:var(--radius); padding:18px;
+    min-height:120px; display:flex; flex-direction:column; justify-content:space-between;
+    transition:border-color .15s, background .15s;
+  }
+  .proj-card:hover{ border-color:var(--accent); background:var(--accent-soft); }
+  .proj-card h4{ font-size:14px; font-weight:600; color:var(--text); }
+  .proj-card p{ font-size:12.5px; color:var(--muted); margin-top:6px; }
+  .proj-plus{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--accent); }
+
+  .contact-card{
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .contact-card h3{ font-size:17px; margin-bottom:5px; }
+  .contact-card p{ font-size:13.5px; color:var(--muted); max-width:360px; }
+
+  footer{ padding:30px 0 40px; text-align:center; font-size:12px; color:var(--muted); }
+
+  @media (max-width:600px){
+    nav ul{ gap:14px; }
+    .edu-card{ flex-direction:column; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition-duration:0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <span class="name">Xyroz Eldhrien Dela Cruz</span>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="avatar" id="avatar">
+      <img src="data:image/jpeg;base64,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" alt="Xyroz Eldhrien Dela Cruz">
+    </div>
+    <div class="eyebrow mono">BS INFORMATION SYSTEM STUDENT</div>
+    <h1>Xyroz Eldhrien <span>Dela Cruz</span></h1>
+    <p class="role">Bachelor of Science in Information System Davao Del Norte State College</p>
+
+    <div class="meta-row">
+      <span class="item"><span class="ico"></span>Manay, Panabo City</span>
+      <span class="item"><span class="ico"></span>Davao Del Norte State College</span>
+      <span class="item"><span class="ico"></span><a href="mailto:delacruz.xyrozeldhrien@dnsc.edu.ph">delacruz.xyrozeldhrien@dnsc.edu.ph</a></span>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:delacruz.xyrozeldhrien@dnsc.edu.ph">Email me</a>
+      <a class="btn btn-outline" href="#projects">View projects</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label mono">ABOUT</div>
+    <div class="card">
+      <p style="font-size:14.5px; color:var(--muted);">
+        I'm an Information System student at Davao Del Norte State College, interested in how
+        data, software, and people come together to make organizations run better. I enjoy
+        learning how systems are designed, built, and improved from databases to the
+        interfaces people actually use.
+      </p>
+      <p class="mono" style="font-size:11.5px; color:var(--accent); margin-top:14px;">
+       
+      </p>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label mono">EDUCATION</div>
+    <div class="card edu-card">
+      <div class="edu-badge">DNSC</div>
+      <div>
+        <h3>Davao Del Norte State College</h3>
+        <p>Bachelor of Science in Information System</p>
+        <div class="note"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label mono">SKILLS</div>
+    <div class="skills-grid">
+      <div class="skill-box">
+        <h4>Languages</h4>
+        <div class="chip-row">
+          <span class="chip">Core Information Systems Skill Domains</span>
+          <span class="chip">Resume & Career</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h4>Databases</h4>
+        <div class="chip-row">
+          <span class="chip">Modern Cloud Warehouses & Big Data</span>
+          <span class="chip">NoSQL & Unstructured Storage</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h4>Tools</h4>
+        <div class="chip-row">
+          <span class="chip">Resume Format</span>
+          <span class="chip">Categorized Tools & Skills Framework</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact">
+    <div class="section-label mono">CONTACT</div>
+    <div class="card contact-card">
+      <div>
+        <h3>Let's connect</h3>
+        <p>Open to internships and projects related to information systems.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:delacruzeldhrien@dnsc.edu.ph">Send email →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; <span id="year"></span> Xyroz Eldhrien Dela Cruz — BS Information System, Davao Del Norte State College
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
